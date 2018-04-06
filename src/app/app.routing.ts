@@ -27,6 +27,11 @@ const appRoutes: Routes = [
     {
         path: 'callback',
         component: CallbackComponent
+    },
+    {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full' 
     }
 ];
 
