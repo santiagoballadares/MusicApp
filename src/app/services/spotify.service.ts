@@ -4,6 +4,7 @@ import { LocalStorageService } from '../services/localStorage.service';
 
 @Injectable()
 export class SpotifyService {
+    private apiRoot: string;
     private authUrl: string;
     private clientId: string;
     private responseType: string;
@@ -11,6 +12,7 @@ export class SpotifyService {
     private token: string;
 
     constructor(private httpClient: HttpClient, private localStorageService: LocalStorageService) {
+        this.apiRoot = 'https://api.spotify.com/v1';
         this.authUrl = 'https://accounts.spotify.com/authorize';
         this.clientId = '4fcd3d6dda9c4a19a8624a284c2bcca3';
         this.responseType = 'token';
@@ -26,10 +28,8 @@ export class SpotifyService {
             this.token = 'Bearer ' + this.localStorageService.retrieve('access_token');
         }
         else {
-            window.location.href = this.authUrl + 
-                '?client_id=' + this.clientId + 
-                '&response_type=' + this.responseType + 
-                '&redirect_uri=' + this.redirectUri;
+            window.location.href = 
+                `${this.authUrl}?client_id=${this.clientId}&response_type=${this.responseType}&redirect_uri=${this.redirectUri}`;
         }
     }
 
@@ -38,12 +38,9 @@ export class SpotifyService {
         this.renewToken();
     }
 
-    searchMusic(value: string, type='artist', market='US', offset=0, limit=20) {
-        let searchUrl = 'https://api.spotify.com/v1/search?q=' + value +
-            '&type=' + type +
-            '&market=' + market +
-            '&offset=' + offset +
-            '&limit=' + limit;
+    search(term: string, type='artist', market='US', offset=0, limit=20) {
+        let searchUrl = 
+            `${this.apiRoot}/search?q=${term}&type=${type}&market=${market}&offset=${offset}&limit=${limit}`;
         let headers = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .set('Authorization', this.token);
@@ -52,7 +49,7 @@ export class SpotifyService {
     }
 
     getArtist(id: string) {
-        let artistUrl = 'https://api.spotify.com/v1/artists/' + id;
+        let artistUrl = `${this.apiRoot}/artists/${id}`;
         let headers = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .set('Authorization', this.token);
@@ -61,7 +58,7 @@ export class SpotifyService {
     }
 
     getAlbums(artistId: string) {
-        let albumsUrl = 'https://api.spotify.com/v1/artists/' + artistId + '/albums';
+        let albumsUrl = `${this.apiRoot}/artists/${artistId}/albums`;
         let headers = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .set('Authorization', this.token);
@@ -70,7 +67,7 @@ export class SpotifyService {
     }
 
     getAlbum(id: string) {
-        let albumUrl = 'https://api.spotify.com/v1/albums/' + id;
+        let albumUrl = `${this.apiRoot}/albums/${id}`;
         let headers = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .set('Authorization', this.token);

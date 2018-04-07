@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
-import { Artist } from '../../../../Artist';
 
 @Component({
   selector: 'search',
@@ -9,25 +8,29 @@ import { Artist } from '../../../../Artist';
   providers: [ SpotifyService ]
 })
 export class SearchComponent implements OnInit {
-  searchTerm: string;
-  searchResponse: Artist[];
+  private loading: boolean = false;
+  private searchTerm: string = '';
+  private searchResult: any[];
 
-  constructor(private spotifyService: SpotifyService) {
-    this.searchTerm = '';
-  }
+  constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit() {
   }
 
   searchMusic() {
     if (!this.searchTerm) {
-      this.searchResponse = [];
+      this.searchResult = null;
       return;
     }
 
-    this.spotifyService.searchMusic(this.searchTerm)
+    this.loading = true;
+
+    this.spotifyService.search(this.searchTerm)
       .subscribe(
-        (res:any) => this.searchResponse = res.artists.items,
+        (res:any) => {
+          this.loading = false;
+          this.searchResult = res.artists.items;
+        },
         err => {
           console.error('Error searching music: ' + JSON.stringify(err)); 
           this.spotifyService.renewToken();

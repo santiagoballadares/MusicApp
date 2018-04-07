@@ -1,16 +1,20 @@
 <h1>Need Music?</h1>
 <p class="lead">Use the MusicApp to browse music and find new releases.</p>
 <form>
-  <div  class="">
-    <input type="text" name="searchTerm" [(ngModel)]="searchTerm" (keyup)="searchMusic()" class="form-control" placeholder="Search Music..." />
+  <div class="form-group">
+    <input type="text" name="searchTerm" class="form-control" placeholder="Search Music..." [(ngModel)]="searchTerm" (keyup)="searchMusic()" />
   </div>
 </form>
 
-<div *ngIf="searchResponse">
-  <div *ngFor="let artist of searchResponse">
+<div class="text-center">
+  <p class="lead" *ngIf="loading">Loading...</p>
+</div>
+
+<div *ngIf="searchResult">
+  <div *ngFor="let artist of searchResult">
     <div class="row">
       <div class="col-md-12">
-        <div class="search-res well">
+        <div class="well">
           <h4><a routerLink="/artist/{{artist.id}}">{{artist.name}}</a></h4>
           <div>
             <strong>Genres: </strong>

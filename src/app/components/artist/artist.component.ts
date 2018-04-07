@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyService } from '../../services/spotify.service';
-import { Artist } from '../../../../Artist';
-import { Album } from '../../../../Album';
 
 @Component({
   selector: 'artist',
@@ -10,9 +8,9 @@ import { Album } from '../../../../Album';
   styleUrls: ['./artist.component.css']
 })
 export class ArtistComponent implements OnInit {
-  id: string;
-  artist: Artist[];
-  albums: Album[];
+  private id: string;
+  private artist: any[];
+  private albums: any[];
 
   constructor(private route: ActivatedRoute, private spotifyService: SpotifyService) { 
     this.id = this.route.snapshot.params.id;
@@ -21,7 +19,7 @@ export class ArtistComponent implements OnInit {
   ngOnInit() {
     this.spotifyService.getArtist(this.id)
       .subscribe(
-        (res: Artist[]) => this.artist = res,
+        (res: any[]) => this.artist = res,
         err => console.error('Error retrieving artist: ' + JSON.stringify(err)),
         () => console.log('Done retrieving artist.')
       );
