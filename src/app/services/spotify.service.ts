@@ -16,8 +16,8 @@ export class SpotifyService {
         this.responseType = 'token';
         this.redirectUri = 'http://localhost:4200/callback';
         
-        this.authenticate();//this.localStorageService.remove('access_token');
-
+        this.authenticate();
+        
         console.log("SpotifyService initialized...");
     }
 
