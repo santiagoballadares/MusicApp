@@ -31,10 +31,7 @@ export class SearchComponent implements OnInit {
           this.loading = false;
           this.searchResult = res.artists.items;
         },
-        err => {
-          console.error('Error searching music: ' + JSON.stringify(err)); 
-          this.spotifyService.renewToken();
-        },
+        err => console.error('Error searching music: ' + JSON.stringify(err)),
         () => console.log('Done searching music.')
       );
   }
