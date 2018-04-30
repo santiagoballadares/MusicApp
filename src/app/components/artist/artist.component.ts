@@ -8,6 +8,8 @@ import { SpotifyService } from '../../services/spotify.service';
   styleUrls: ['./artist.component.css']
 })
 export class ArtistComponent implements OnInit {
+  private noImagePath: string = "/assets/noimage.jpg";
+  
   private id: string;
   private artist: any[];
   private albums: any[];

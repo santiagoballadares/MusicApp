@@ -17,6 +17,11 @@
   margin-right: 10px;
 }
 
+.artist-small-thumb {
+  width: 80px;
+  height: 80px;
+}
+
 .artist-albums .card {
   margin-bottom: 20px;
   overflow: auto;

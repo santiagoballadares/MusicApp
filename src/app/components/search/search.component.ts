@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { SpotifyService } from '../../services/spotify.service';
   providers: [ SpotifyService ]
 })
 export class SearchComponent implements OnInit {
+  private noImagePath: string = "/assets/noimage.jpg";
+  
   private loading: boolean = false;
   private searchTerm: string = '';
   private searchResult: any[];

@@ -1,21 +1,24 @@
-<div *ngIf="artist">
-  <header class="artist-header">
-    <div *ngIf="artist.images.length > 0">
-      <img class="artist-thumb rounded-circle" src="{{artist.images[0].url}}" />
+<div *ngIf='artist'>
+  <header class='artist-header'>
+    <div *ngIf='artist.images.length > 0;else default_image'>
+      <img class='artist-thumb rounded-circle' src='{{artist.images[0].url}}' />
     </div>
+    <ng-template #default_image>
+      <img class='artist-thumb rounded-circle' src='{{noImagePath}}' />
+    </ng-template>
     <h1>{{artist.name}}</h1>
-    <p *ngIf="artist.genres.length > 0">
-      <strong>Genres: </strong> <span *ngFor="let genre of artist.genres">{{genre}}, </span>
+    <p *ngIf='artist.genres.length > 0'>
+      <strong>Genres: </strong> <span *ngFor='let genre of artist.genres'>{{genre}}, </span>
     </p>
   </header>
 
-  <div class="row artist-albums">
-    <div class="col-md-6" *ngFor="let album of albums">
-      <div class="card album" *ngIf="album.images.length > 0">
-        <div class="card-body">
-          <img class="album-thumb img-thumbnail" src="{{album.images[0].url}}" />
+  <div class='row artist-albums'>
+    <div class='col-md-6' *ngFor='let album of albums'>
+      <div class='card album' *ngIf='album.images.length > 0'>
+        <div class='card-body'>
+          <img class='album-thumb img-thumbnail' src='{{album.images[0].url}}' />
           <h4>{{album.name}}</h4>
-          <a class="btn btn-secondary btn-block" routerLink="/album/{{album.id}}">Album details</a>
+          <a class='btn btn-secondary btn-block' routerLink='/album/{{album.id}}'>Album details</a>
         </div>
       </div>
     </div>

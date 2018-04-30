@@ -1,24 +1,32 @@
 <h1>Need Music?</h1>
-<p class="lead">Use the MusicApp to browse music and find new releases.</p>
+<p class='lead'>Use the MusicApp to browse music and find new releases.</p>
 <form>
-  <div class="form-group">
-    <input type="text" name="searchTerm" class="form-control" placeholder="Search Music..." [(ngModel)]="searchTerm" (keyup)="searchMusic()" />
+  <div class='form-group'>
+    <input type='text' name='searchTerm' class='form-control' placeholder='Search Music...' [(ngModel)]='searchTerm' (keyup)='searchMusic()' />
   </div>
 </form>
 
-<div class="text-center">
-  <p class="lead" *ngIf="loading">Loading...</p>
+<div class='text-center'>
+  <p class='lead' *ngIf='loading'>Loading...</p>
 </div>
 
-<div *ngIf="searchResult">
-  <div *ngFor="let artist of searchResult">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-body">
-            <h4><a routerLink="/artist/{{artist.id}}">{{artist.name}}</a></h4>
+<div *ngIf='searchResult'>
+  <div *ngFor='let artist of searchResult'>
+    <div class='card'>
+      <div class='card-body'>
+        <div class='row'>
+          <div class='col-sm-1' *ngIf='artist.images.length > 0;else default_image'>
+            <img class='artist-small-thumb' src='{{artist.images[0].url}}' />
+          </div>
+          <ng-template #default_image>
+            <div class='col-sm-1'>
+              <img class='artist-small-thumb' src='{{noImagePath}}' />
+            </div>
+          </ng-template>
+          <div class='col-sm-11'>
+            <h4><a routerLink='/artist/{{artist.id}}'>{{artist.name}}</a></h4>
             <strong>Genres: </strong>
-            <span *ngFor="let genre of artist.genres">{{genre}}, </span>
+            <span *ngFor='let genre of artist.genres'>{{genre}}, </span>
           </div>
         </div>
       </div>

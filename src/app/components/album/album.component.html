@@ -1,34 +1,34 @@
-<div id="album" *ngIf="album">
-  <header class="album-header">
-    <div class="row">
-      <div class="col-md-4">
-        <div *ngIf="album.images.length > 0">
-          <img class="album-thumb" src="{{album.images[0].url}}" />
+<div id='album' *ngIf='album'>
+  <header class='album-header'>
+    <div class='row'>
+      <div class='col-md-4'>
+        <div *ngIf='album.images.length > 0'>
+          <img class='album-thumb' src='{{album.images[0].url}}' />
         </div>
       </div>
-      <div class="col-md-8">
-        <h4 *ngIf="album.artists.length > 0">
-          <span *ngFor="let artist of album.artists">
+      <div class='col-md-8'>
+        <h4 *ngIf='album.artists.length > 0'>
+          <span *ngFor='let artist of album.artists'>
             {{artist.name}}
           </span>
         </h4>
         <h2>{{album.name}}</h2>
         <h5>Release Date: {{album.release_date}}</h5>
-        <a class="btn btn-primary" href="{{album.external_urls.spotify}}" target="_black">View in Spotify</a>
+        <a class='btn btn-primary' href='{{album.external_urls.spotify}}' target='_black'>View in Spotify</a>
       </div>
     </div>
   </header>
 
   <br />
 
-  <div class="card album-tracks" style="width: 32rem;">
-    <div class="card-header">
+  <div class='card album-tracks' style='width: 32rem;'>
+    <div class='card-header'>
       <h2>Album Tracks</h2>
     </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let track of album.tracks.items">
+    <ul class='list-group list-group-flush'>
+        <li class='list-group-item' *ngFor='let track of album.tracks.items'>
           <h5>{{track.track_number}}. {{track.name}}</h5>
-          <a href="{{track.preview_url}}" target="_black">Preview Track</a>
+          <a href='{{track.preview_url}}' target='_black'>Preview Track</a>
        </li>
     </ul>
   </div>

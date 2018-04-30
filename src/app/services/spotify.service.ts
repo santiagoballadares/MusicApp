@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LocalStorageService } from '../services/localStorage.service';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class SpotifyService {
     
     this.authenticate();
     
-    console.log("SpotifyService initialized...");
+    console.log('SpotifyService initialized...');
   }
 
   private authenticate() {
